@@ -43,3 +43,9 @@ npm run build
 Danach `http://localhost:3000` öffnen. Nach dem Produktionsbuild kann `npm start` verwendet werden. Für Vercel dieses Repository als Next.js-Projekt importieren; keine Datenbank oder Umgebungsvariablen erforderlich.
 
 11 Logikprüfungen prüfen Gewinne, Kapitalfluss, Lagerbewertung, Teilverkäufe, Futterkosten, Tageslimits und die Übernahme alter Spielstände. Der Produktionsbuild wurde erfolgreich geprüft.
+
+## Geprüfte Gewinnanzeige
+
+Die folgende Ansicht zeigt den Verkauf von 25 Brot nach dem vorherigen Einkauf: 38,75 Euro Erlös minus 22,50 Euro Wareneinsatz ergibt 16,25 Euro Verkaufsgewinn vor Tageskosten. Der anschließende Tagesabschluss wurde im Browser mit 8,25 Euro Betriebsgewinn geprüft.
+
+![Gewinnanzeige im Wirtschaftssimulator 0.2](docs/gewinnanzeige-0.2.jpg)
