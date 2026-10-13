@@ -1,36 +1,45 @@
 # Wirtschaftssimulator
 
-Ein eigenständiges Next.js-Grundgerüst für einen Wirtschaftssimulator. Im Mittelpunkt stehen vorhandene Betriebe, Einkauf, Lagerbestände, Produktion, Verkauf und laufende Kosten.
+Ein eigenständiger Next.js-Wirtschaftssimulator mit vorhandenen Betrieben, Einkauf, Lagerverwaltung, Produktion und Verkauf. Aktuell: Version 0.2.
 
 ## Kategorien
 
-1. **Handel:** Tante-Emma-Laden und Supermarkt.
-2. **Farmwirtschaft:** Ackerbetrieb und Tabakfarm; Erzeugnisse für Handel und Großhandel.
-3. **Tierwirtschaft:** Milchbetrieb, Geflügelbetrieb und Schafbetrieb.
+1. Handel: Tante-Emma-Laden und Supermarkt.
+2. Farmwirtschaft: Ackerbetrieb und Tabakfarm.
+3. Tierwirtschaft: Milch-, Geflügel- und Schafbetrieb.
 
-Weitere Kategorien können über die Datenlisten in `lib/economy.mjs` ergänzt werden. Es gibt keinen Gebäudebau oder Farmkartenmodus.
+Du übernimmst fertige Betriebe und wirtschaftest damit. Die Datenlisten in `lib/economy.mjs` ermöglichen weitere Kategorien und Betriebe.
 
-## Erste spielbare Funktionen
+## Gewinn und Kapital
 
-- Startkapital 100.000 Euro und ein vorhandener Tante-Emma-Laden mit Anfangswaren.
-- Bestehende Betriebe übernehmen, Waren einkaufen, Ladenkunden und Großhandel beliefern.
-- Gemeinsames Warenlager, Mengenwahl, begrenzte Nachfrage im Laden.
-- Produktionsaufträge mit Futterbedarf, Kosten und Fertigstellung nach Geschäftstagen.
-- Tagesabschluss, Betriebskosten, Ergebnisübersicht und Betriebstagebuch.
-- Spielstand im Browser auf diesem Gerät; keine Anmeldung oder Cloud-Synchronisierung.
-- Deutschsprachige Oberfläche für Computer, Tablet und Smartphone.
+- Verkaufsgewinn = Verkaufserlös minus Einkaufs- oder Herstellungskosten der tatsächlich verkauften Einheiten.
+- Betriebsergebnis = Verkaufsgewinn minus laufende Betriebskosten.
+- Wareneinkauf senkt das verfügbare Kapital und erhöht den Lagerwert. Kosten der Ware werden erst bei deren Verkauf im Gewinn berücksichtigt.
+- Produktionskosten einschließlich Futter werden zunächst als Kosten der laufenden Charge gespeichert, dann auf den Lagerbestand übertragen und beim Verkauf anteilig abgezogen.
+- Gemischte Bestände verwenden einen gewichteten durchschnittlichen Einstandspreis. Teilverkäufe verteilen die Kosten auf ganze Cent; beim letzten Verkauf wird der Rest exakt ausgebucht.
+- Betriebsübernahmen werden separat als Investitionen ausgewiesen. Sie reduzieren Kapital, jedoch nicht sofort den operativen Verkaufsgewinn. Abschreibung und Steuern sind noch nicht umgesetzt.
+- Gewinnvorschau direkt an den Verkaufsbuttons; Abrechnung jedes Verkaufs; tägliche und gesamte Ergebnisübersicht sowie separate Geldbewegungen.
+- Der Startladen hat 120 Kundenverkäufe pro Tag und 8 Euro tägliche Betriebskosten. Der Großhandel hat ebenfalls ein Tageslimit, damit wiederholtes Einkaufen und Verkaufen nicht unbegrenzt Kapital erzeugt.
 
-Die Geldbeträge und Erträge sind Spielwerte. Die erste Tagesrechnung ist eine einfache Einnahmen-Ausgaben-Rechnung: Auch Betriebsübernahmen werden sofort als Ausgabe erfasst; Abschreibung, Steuern, Verderb, Personalplanung und dynamische Marktpreise sind noch nicht umgesetzt. Die Startwaren sind Teil der Spielausstattung. Ein Tag vergeht über den Knopf „Tag abschließen“, nicht während das Spiel geschlossen ist. Zahlungen sind ausschließlich Spielgeld.
+Beispiel ohne weitere Betriebe: 25 Brot zu 0,90 Euro einkaufen und zu 1,55 Euro verkaufen ergibt 38,75 Euro Erlös, 22,50 Euro Wareneinsatz und 16,25 Euro Verkaufsgewinn. Nach 8 Euro Tageskosten bleiben 8,25 Euro Tagesgewinn. Tage ohne genügend Verkäufe können Verlust machen.
 
-## Start
+Alle Preise und Erträge sind Spielwerte. Geschäftstage werden über „Tag abschließen“ weitergeschaltet. Das Spiel verwendet ausschließlich Spielgeld.
+
+## Vorhandene Spielstände
+
+Der Speicherschlüssel `wirtschaftssimulator-v1` bleibt erhalten. Geld, Geschäftstag, vorhandene Betriebe, Waren und laufende Produktionen werden aus Version 0.1 übernommen. Da die erste Version keine Wareneinsatzhistorie gespeichert hat, startet die neue Gewinnrechnung ab dem Update. Vorhandene Waren werden einmalig zu den bisherigen Einkaufspreisen bewertet; ältere Tagesabrechnungen bleiben im Spielstand archiviert und werden nicht nachträglich als neue Gewinne ausgegeben. Die Übernahme erfolgt genau einmal.
+
+Speicherung erfolgt auf diesem Gerät im Browser. Anmeldung und Cloud-Synchronisierung sind noch nicht eingebaut. Die Oberfläche unterstützt Computer, Tablet und Smartphone.
+
+## Start und Prüfung
 
 ```bash
 npm ci
 npm run dev
+npm test
+npm run build
 ```
 
-Danach `http://localhost:3000` öffnen. Produktionsbuild: `npm run build`, anschließend `npm start`. Prüfungen: `npm test`.
+Danach `http://localhost:3000` öffnen. Nach dem Produktionsbuild kann `npm start` verwendet werden. Für Vercel dieses Repository als Next.js-Projekt importieren; keine Datenbank oder Umgebungsvariablen erforderlich.
 
-Für Vercel: Dieses Repository als Next.js-Projekt importieren. Es benötigt für das Grundgerüst keine Umgebungsvariablen und keine Datenbank.
-
-Version 0.1 – Erstes Grundgerüst.
+11 Logikprüfungen prüfen Gewinne, Kapitalfluss, Lagerbewertung, Teilverkäufe, Futterkosten, Tageslimits und die Übernahme alter Spielstände. Der Produktionsbuild wurde erfolgreich geprüft.
