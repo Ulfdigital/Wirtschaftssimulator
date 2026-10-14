@@ -1,51 +1,15 @@
-# Wirtschaftssimulator
+# Wirtschaftssimulator 0.3
 
-Ein eigenständiger Next.js-Wirtschaftssimulator mit vorhandenen Betrieben, Einkauf, Lagerverwaltung, Produktion und Verkauf. Aktuell: Version 0.2.
+Next.js-Spiel mit Ladenkauf, befüllbaren Regalen, Wareneinkauf und laufendem Kundenverkauf. Standort- und Ladenillustrationen zeigen bezugsfertige, unbestückte Geschäfte. Der tatsächliche Bestand steht an jedem bedienbaren Regal.
 
-## Kategorien
+Ein neues Unternehmen startet mit 25.000 Euro Spielkapital, ohne Laden und ohne Waren. Der Tante-Emma-Laden kostet 18.000 Euro und bietet sechs Regale mit je 40 Stück; der Supermarkt kostet 35.000 Euro und bietet zwölf Regale mit je 80 Stück. Waren können bei drei fiktiven Lieferanten bestellt werden. Einkaufspreise, Kundenpreise und Spanne stehen direkt am Produkt. Einräumen reserviert Lagerware für den Laden; Ausräumen gibt sie ohne Geld- oder Bestandsverlust zurück.
 
-1. Handel: Tante-Emma-Laden und Supermarkt.
-2. Farmwirtschaft: Ackerbetrieb und Tabakfarm.
-3. Tierwirtschaft: Milch-, Geflügel- und Schafbetrieb.
+Die Uhr folgt Europe/Berlin einschließlich Sommer-/Winterzeit. Öffnung ist zwischen 08:00 und 20:00 Uhr möglich, nachdem mindestens ein Regal bestückt wurde. Kunden kaufen alle 30 Sekunden eine verfügbare Einheit bis zur Tagesnachfrage des jeweiligen Ladens. Um 20:00 Uhr endet der Verkauf, die Betriebskosten werden einmal gebucht und die Abrechnung wird gespeichert. Es gibt keinen Knopf mehr zum manuellen Wechseln des Tages. Einkaufen und Bestücken sind auch abends möglich. Am nächsten Morgen kann der Laden erneut geöffnet werden. Bei einer Rückkehr wird der letzte aktive Geschäftstag abgewickelt; für übersprungene, nicht gespielte Tage wird keine Kette von Betriebskosten nachberechnet. Farm- und Tierproduktionen laufen dagegen mit absoluten Zeitstempeln von 24/48/72 Stunden und sind danach einmal abholbar.
 
-Du übernimmst fertige Betriebe und wirtschaftest damit. Die Datenlisten in `lib/economy.mjs` ermöglichen weitere Kategorien und Betriebe.
+Die Geldübersicht trennt verfügbares Kapital, Umsatz, Verkaufsgewinn, Betriebsgewinn und Warenwert. Investments und Wareneinkäufe sind kein unmittelbarer Verkaufsverlust. Der tatsächliche Wareneinsatz wird beim Verkauf aus dem durchschnittlichen Bestandswert abgezogen. Bei nicht ausreichendem Geld werden offene Betriebskosten sichtbar als Verbindlichkeit geführt; sie verhindern die automatische Schließung nicht und lassen sich später bezahlen.
 
-## Gewinn und Kapital
+Bestehende Spielstände unter wirtschaftssimulator-v1 werden mit ihrem Geld, ihren Betrieben, Waren und Produktionsaufträgen übernommen. Alte Waren liegen zunächst frei im Lager. Neue-Regal-Konfiguration und Uhr werden ergänzt, vorhandene Waren werden nicht dupliziert. Wer die neue Anfangssituation ausprobieren möchte, kann „Neues Unternehmen beginnen“ wählen: Der bisherige Stand wird zuvor lokal gesichert und lässt sich über „Letzte Sicherung wiederherstellen“ zurückholen. Speicherfehler oder ungültige vorhandene Stände werden angezeigt und nicht überschrieben.
 
-- Verkaufsgewinn = Verkaufserlös minus Einkaufs- oder Herstellungskosten der tatsächlich verkauften Einheiten.
-- Betriebsergebnis = Verkaufsgewinn minus laufende Betriebskosten.
-- Wareneinkauf senkt das verfügbare Kapital und erhöht den Lagerwert. Kosten der Ware werden erst bei deren Verkauf im Gewinn berücksichtigt.
-- Produktionskosten einschließlich Futter werden zunächst als Kosten der laufenden Charge gespeichert, dann auf den Lagerbestand übertragen und beim Verkauf anteilig abgezogen.
-- Gemischte Bestände verwenden einen gewichteten durchschnittlichen Einstandspreis. Teilverkäufe verteilen die Kosten auf ganze Cent; beim letzten Verkauf wird der Rest exakt ausgebucht.
-- Betriebsübernahmen werden separat als Investitionen ausgewiesen. Sie reduzieren Kapital, jedoch nicht sofort den operativen Verkaufsgewinn. Abschreibung und Steuern sind noch nicht umgesetzt.
-- Gewinnvorschau direkt an den Verkaufsbuttons; Abrechnung jedes Verkaufs; tägliche und gesamte Ergebnisübersicht sowie separate Geldbewegungen.
-- Der Startladen hat 120 Kundenverkäufe pro Tag und 8 Euro tägliche Betriebskosten. Der Großhandel hat ebenfalls ein Tageslimit, damit wiederholtes Einkaufen und Verkaufen nicht unbegrenzt Kapital erzeugt.
+Entwicklung: npm ci, npm run dev. Prüfung: npm test und npm run build. Keine Datenbank oder Zugangsdaten erforderlich. Preise, Lieferanten und Kunden sind Spielwerte.
 
-Beispiel ohne weitere Betriebe: 25 Brot zu 0,90 Euro einkaufen und zu 1,55 Euro verkaufen ergibt 38,75 Euro Erlös, 22,50 Euro Wareneinsatz und 16,25 Euro Verkaufsgewinn. Nach 8 Euro Tageskosten bleiben 8,25 Euro Tagesgewinn. Tage ohne genügend Verkäufe können Verlust machen.
-
-Alle Preise und Erträge sind Spielwerte. Geschäftstage werden über „Tag abschließen“ weitergeschaltet. Das Spiel verwendet ausschließlich Spielgeld.
-
-## Vorhandene Spielstände
-
-Der Speicherschlüssel `wirtschaftssimulator-v1` bleibt erhalten. Geld, Geschäftstag, vorhandene Betriebe, Waren und laufende Produktionen werden aus Version 0.1 übernommen. Da die erste Version keine Wareneinsatzhistorie gespeichert hat, startet die neue Gewinnrechnung ab dem Update. Vorhandene Waren werden einmalig zu den bisherigen Einkaufspreisen bewertet; ältere Tagesabrechnungen bleiben im Spielstand archiviert und werden nicht nachträglich als neue Gewinne ausgegeben. Die Übernahme erfolgt genau einmal.
-
-Speicherung erfolgt auf diesem Gerät im Browser. Anmeldung und Cloud-Synchronisierung sind noch nicht eingebaut. Die Oberfläche unterstützt Computer, Tablet und Smartphone.
-
-## Start und Prüfung
-
-```bash
-npm ci
-npm run dev
-npm test
-npm run build
-```
-
-Danach `http://localhost:3000` öffnen. Nach dem Produktionsbuild kann `npm start` verwendet werden. Für Vercel dieses Repository als Next.js-Projekt importieren; keine Datenbank oder Umgebungsvariablen erforderlich.
-
-11 Logikprüfungen prüfen Gewinne, Kapitalfluss, Lagerbewertung, Teilverkäufe, Futterkosten, Tageslimits und die Übernahme alter Spielstände. Der Produktionsbuild wurde erfolgreich geprüft.
-
-## Geprüfte Gewinnanzeige
-
-Die folgende Ansicht zeigt den Verkauf von 25 Brot nach dem vorherigen Einkauf: 38,75 Euro Erlös minus 22,50 Euro Wareneinsatz ergibt 16,25 Euro Verkaufsgewinn vor Tageskosten. Der anschließende Tagesabschluss wurde im Browser mit 8,25 Euro Betriebsgewinn geprüft.
-
-![Gewinnanzeige im Wirtschaftssimulator 0.2](docs/gewinnanzeige-0.2.jpg)
+21 Logiktests prüfen Kostenrechnung, alte Spielstände, Ladenkauf, Regale, reservierte Ware, automatischen Verkauf, Zeit-/Schließgrenzen, einmalige Abrechnung, Neuladen und Produktionszeitstempel. Build und veröffentlichte Bedienung zusätzlich prüfen.
