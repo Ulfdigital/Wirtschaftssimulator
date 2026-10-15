@@ -1,6 +1,6 @@
-# Wirtschaftssimulator 0.5
+# Wirtschaftssimulator 0.6
 
-Ein Browser-Spiel mit eigenem Tante-Emma-Laden, Saatgutmarkt, Äckern, Tierhöfen und Produktionsketten. Alle Preise sind Spielwerte; keine echten Bestellungen oder Zahlungen.
+Ein Browser-Spiel mit eigenem Tante-Emma-Laden, Saatgutmarkt, Äckern, Tierhöfen und Produktionsketten. Preise, Erträge und Kosten orientieren sich an echten deutschen Marktwerten (Stand Oktober 2026, siehe docs/UPDATE-0.6.md); keine echten Bestellungen oder Zahlungen.
 
 ## Einstieg und Fortschritt
 Neue Unternehmen beginnen mit 25.000 Euro und einem kleinen Laden mit sechs leeren Regalen. Ein Acker ist ab Level 1 zum Kauf freigeschaltet; pro Level kommt ein weiterer hinzu, maximal 16. Vorhandene größere Ackerbestände bleiben auch bei niedrigerem Level erhalten. Äcker kosten zuerst 150 Euro und je weiterem Acker 50 Euro mehr. Saatpakete reichen für einen Acker; nach jeder Ernte ist die Pflanze frei wählbar. Wachstum dauert vier bis acht echte Minuten. Ernten geben 25 EP, Ladenverkäufe 1 EP je Stück, Produktionsabholungen 10 EP. Alle 100 EP folgt ein Level.
