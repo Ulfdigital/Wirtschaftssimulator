@@ -1,8 +1,8 @@
-# Wirtschaftssimulator 0.3
+# Wirtschaftssimulator 0.4
 
 Next.js-Spiel mit Ladenkauf, befüllbaren Regalen, Wareneinkauf und laufendem Kundenverkauf. Standort- und Ladenillustrationen zeigen bezugsfertige, unbestückte Geschäfte. Der tatsächliche Bestand steht an jedem bedienbaren Regal.
 
-Ein neues Unternehmen startet mit 25.000 Euro Spielkapital, ohne Laden und ohne Waren. Der Tante-Emma-Laden kostet 18.000 Euro und bietet sechs Regale mit je 40 Stück; der Supermarkt kostet 35.000 Euro und bietet zwölf Regale mit je 80 Stück. Waren können bei drei fiktiven Lieferanten bestellt werden. Einkaufspreise, Kundenpreise und Spanne stehen direkt am Produkt. Einräumen reserviert Lagerware für den Laden; Ausräumen gibt sie ohne Geld- oder Bestandsverlust zurück.
+Ein neues Unternehmen startet mit 25.000 Euro Spielkapital und einem kostenlosen Tante-Emma-Laden mit sechs leeren Regalen. Vorhandene Spielstände werden nicht automatisch zurückgesetzt; der gut sichtbare Neustartknopf sichert den bisherigen Stand lokal. Der Tante-Emma-Laden kostet 18.000 Euro und bietet sechs Regale mit je 40 Stück; der Supermarkt kostet 35.000 Euro und bietet zwölf Regale mit je 80 Stück. Waren können bei drei fiktiven Lieferanten bestellt werden. Einkaufspreise, Kundenpreise und Spanne stehen direkt am Produkt. Einräumen reserviert Lagerware für den Laden; Ausräumen gibt sie ohne Geld- oder Bestandsverlust zurück.
 
 Die Uhr folgt Europe/Berlin einschließlich Sommer-/Winterzeit. Öffnung ist zwischen 06:00 und 23:00 Uhr möglich, nachdem mindestens ein Regal bestückt wurde. Kunden kaufen alle 30 Sekunden eine verfügbare Einheit bis zur Tagesnachfrage des jeweiligen Ladens. Um 23:00 Uhr endet der Verkauf, die Betriebskosten werden einmal gebucht und die Abrechnung wird gespeichert. Es gibt keinen Knopf mehr zum manuellen Wechseln des Tages. Einkaufen und Bestücken sind auch abends möglich. Am nächsten Morgen kann der Laden erneut geöffnet werden. Bei einer Rückkehr wird der letzte aktive Geschäftstag abgewickelt; für übersprungene, nicht gespielte Tage wird keine Kette von Betriebskosten nachberechnet. Farm- und Tierproduktionen laufen dagegen mit absoluten Zeitstempeln von 24/48/72 Stunden und sind danach einmal abholbar.
 
@@ -12,4 +12,12 @@ Bestehende Spielstände unter wirtschaftssimulator-v1 werden mit ihrem Geld, ihr
 
 Entwicklung: npm ci, npm run dev. Prüfung: npm test und npm run build. Keine Datenbank oder Zugangsdaten erforderlich. Preise, Lieferanten und Kunden sind Spielwerte.
 
-22 Logiktests prüfen Kostenrechnung, alte Spielstände, Ladenkauf, Regale, reservierte Ware, automatischen Verkauf, Zeit-/Schließgrenzen, einmalige Abrechnung, Neuladen und Produktionszeitstempel. Build und veröffentlichte Bedienung zusätzlich prüfen.
+27 Logiktests prüfen Kostenrechnung, alte Spielstände, Ladenkauf, Regale, reservierte Ware, automatischen Verkauf, Zeit-/Schließgrenzen, einmalige Abrechnung, Neuladen und Produktionszeitstempel. Build und veröffentlichte Bedienung zusätzlich prüfen.
+
+
+## Markt, Ackerland und Level (0.4)
+Der Markt enthält 34 Waren einschließlich sechs Saatgutpaketen (Rosen, Getreide, Kartoffeln, Sonnenblumen, Karotten, Tomaten). Jedes Paket reicht für einen Acker. Ein Acker kostet zunächst 150 Euro, jeder weitere 50 Euro mehr (höchstens acht). Wachstum dauert vier bis sechs echte Minuten; ein erntereifer Acker bleibt bis zum Abholen erhalten und lässt sich danach neu bepflanzen. Saatkosten wandern in die Herstellungskosten der Ernte. Freie Lagerplätze sind erforderlich.
+
+Verkäufe an Ladenkunden geben je einen EP, Ernten je 25 EP. Alle 100 EP folgt ein Level: Blumenladen ab 2, Fleischerei/Metzgerei ab 3, Käserei mit Verkauf ab 4, Supermarkt ab 5. Spezialgeschäfte haben passende Sortimente. Die Käserei verarbeitet 10 freie Milch zu 5 Käse unter Übernahme der Milchkosten. Die übrigen Farm-/Tierbetriebe bleiben mit bisherigen Produktionszeiten erhalten.
+
+Unter „Verkaufspreise einstellen“ kann jeder Laden seinen Preis je Ware in Euro speichern. Spanne und Kosten stehen daneben. Höhere Preise verlangsamen Kundeneinkäufe, oberhalb des doppelten Richtpreises kauft kein Kunde. Preisangaben gelten je geerntetem Stück, Saatgutpreise je Ackerpaket. Beispiel: 3 Euro Rosensaat liefert 20 Rosen mit 15 Cent Saatkosten pro Rose. Preise zwischen 0,01 und 1.000 Euro sind technisch zulässig; Tagesnachfrage und Betriebskosten gelten weiterhin. Das Spiel verwendet ausschließlich Spielgeld und lokale Browser-Speicherung.
