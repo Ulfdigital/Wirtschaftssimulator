@@ -4,7 +4,7 @@
 - Neuer Spielbeginn: 25.000 Euro, kein Laden und keine Waren. Ladenkauf ist eine echte Investition innerhalb des Spiels.
 - Sechs beziehungsweise zwölf einzeln bestückbare Regale. Gesamtbestand und reservierte Ware bleiben konsistent.
 - Lieferantenansicht mit Stückpreisen, Mengenwahl, Gesamtpreis und Handelsspanne; freie Lagerware separat verwalten.
-- Simulierte Kunden kaufen automatisch aus Regalen, nur während der geöffneten Geschäftszeit. Schließung und Tagesabrechnung erfolgen automatisch um 20:00 deutscher Zeit.
+- Simulierte Kunden kaufen automatisch aus Regalen, nur während der geöffneten Geschäftszeit. Schließung und Tagesabrechnung erfolgen automatisch um 23:00 deutscher Zeit.
 - Echte Uhrzeit statt manuellem Tageswechsel; Farmen und Tierbetriebe nutzen feste Produktionszeitstempel.
 - Bestehende Stände übernehmen. Freiwilliger neuer Start mit lokalem Backup und Wiederherstellung im Spiel.
 
