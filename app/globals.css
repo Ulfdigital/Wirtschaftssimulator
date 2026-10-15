@@ -13,3 +13,15 @@
 .land-buttons{display:flex;gap:10px;flex-wrap:wrap}.quantity-bar small{display:block;color:var(--muted);width:100%}
 .crop-facts{display:grid;grid-template-columns:1fr auto;gap:4px 12px;margin:10px 0}.crop-facts div{display:contents}.crop-facts dt{color:var(--muted)}.crop-facts dd{margin:0;font-weight:700;text-align:right}
 .seed-card.locked{opacity:.6}.positive{color:#1f7a4d}.negative{color:#b3261e}
+
+/* 0.7 – gezeichnete Regale, Waren und Äcker */
+.shelf-display-art{margin-bottom:18px;border-radius:6px;overflow:hidden;box-shadow:0 8px 18px #2b1f1426}
+.shelf-svg{display:block;width:100%;height:auto}
+.field-art{border-radius:12px;overflow:hidden;margin-bottom:14px;box-shadow:0 6px 16px #1d2b2026}
+.field-svg{display:block;width:100%;height:auto;aspect-ratio:320/150}
+.seed-field-art{border-radius:10px;overflow:hidden;margin-bottom:14px}
+.seed-field-art .field-svg{aspect-ratio:320/110}
+.stock-card-heading{align-items:center;gap:12px}
+.stock-card-heading>svg{flex-shrink:0;background:#f6f3ec;border-radius:10px;padding:4px}
+.stock-card-heading>strong{font-size:26px;white-space:nowrap;text-align:right}.stock-card-heading>strong small{font-size:13px;color:var(--muted);font-weight:600}.stock-card-heading>div{flex:1;min-width:0}
+.quantity-bar{align-items:center}.quantity-bar>strong{flex:1;min-width:200px}
