@@ -1,23 +1,29 @@
-# Wirtschaftssimulator 0.6
+# Wirtschaftssimulator 1.0
 
-Ein Browser-Spiel mit eigenem Tante-Emma-Laden, Saatgutmarkt, Äckern, Tierhöfen und Produktionsketten. Preise, Erträge und Kosten orientieren sich an echten deutschen Marktwerten (Stand Oktober 2026, siehe docs/UPDATE-0.6.md); keine echten Bestellungen oder Zahlungen.
+Vom Tante-Emma-Laden zum Verbrauchermarkt: Regale bestücken, im Großhandel einkaufen, Preise setzen, Personal einstellen und den Laden Stufe für Stufe ausbauen. Browser-Spiel, gespeichert auf dem Gerät (`wirtschaftssimulator-v2`). Version 1.0 ist ein kompletter Neustart; alte Spielstände werden nicht übernommen.
 
-## Einstieg und Fortschritt
-Neue Unternehmen beginnen mit 25.000 Euro und einem kleinen Laden mit sechs leeren Regalen. Ein Acker ist ab Level 1 zum Kauf freigeschaltet; pro Level kommt ein weiterer hinzu, maximal 16. Vorhandene größere Ackerbestände bleiben auch bei niedrigerem Level erhalten. Äcker kosten zuerst 150 Euro und je weiterem Acker 50 Euro mehr. Saatpakete reichen für einen Acker; nach jeder Ernte ist die Pflanze frei wählbar. Wachstum dauert vier bis acht echte Minuten. Ernten geben 25 EP, Ladenverkäufe 1 EP je Stück, Produktionsabholungen 10 EP. Alle 100 EP folgt ein Level.
+## So läuft ein Tag
+Der Laden ist von 7 bis 21 Uhr geöffnet. Eine echte Sekunde ist eine Spielminute (Tempo 1×, 2×, 4×, 8×). Vor dem Öffnen räumst du Regale ein und bestellst Ware (bei geschlossenem Laden kommt sie sofort, sonst nach 30 Minuten). Kunden kommen je nach Ladengröße, Sortimentsbreite, Zufriedenheit und Tageszeit, nehmen Ware aus den Regalen und stellen sich an die Kassen. Um 21 Uhr folgt der Tagesabschluss mit Umsatz, Wareneinsatz, Miete, Löhnen und Strom.
 
-## Saatgut und Warenkreislauf
-Der Saatgutmarkt verkauft ausschließlich 24 Saatgutsorten. 83 Waren einschließlich Saatgut und 37 Herstellungsrezepte bilden einen geschlossenen Warenkreislauf. Alle Nicht-Saatgut-Waren sind aus Saatgut und eigener Herstellung erreichbar; Wasser kommt aus einem kaufbaren Brunnen. Vorhandene alte Marktbestände bleiben nutzbar.
+## Ladenstufen
+| Stufe | Level | Kosten | Regale | Kassen | Kunden/Tag |
+| --- | --- | --- | --- | --- | --- |
+| Tante-Emma-Laden | 1 | Start | 2 | 1 | ~110 |
+| Dorfladen | 3 | 2.500 € | 4 | 1 | ~240 |
+| Nachbarschaftsmarkt | 6 | 9.000 € | 6 | 2 | ~480 |
+| Lebensmittelmarkt | 10 | 30.000 € | 9 | 3 | ~900 |
+| Supermarkt | 15 | 90.000 € | 12 | 4 | ~1.500 |
+| Großer Supermarkt | 22 | 250.000 € | 16 | 6 | ~2.400 |
+| Verbrauchermarkt | 30 | 650.000 € | 20 | 8 | ~3.600 |
 
-Mais oder Hafer und Weizen werden in der Mühle zu Tierfutter. Dieses versorgt Hühner, Milchkühe, Schweine, Ziegen, Enten, Kaninchen, Rinder und Mastgeflügel. Tierhöfe enthalten abstrakt ihren Tierbestand; eine Runde verbraucht Futter und liefert die beschriebenen Erzeugnisse. Tiere werden nicht als einzeln steuerbare 3D-Objekte dargestellt. Die Mühle stellt außerdem Mehl und Nudeln her. Bäckerei, Zuckerfabrik, Marmeladenfabrik, Imkerei/Honigfabrik, Käserei, Fleischerei, Mosterei, Kaffeerösterei, Öl-/Salzwerk, Weberei und Seifenmanufaktur verarbeiten eigene Zutaten. Rezeptkosten sind die tatsächlichen Einstandskosten der verbrauchten Zutaten; laufende Tageskosten decken Betriebsmittel. Mehrere Ausgänge wie Honig und Wachs teilen ihre Kosten centgenau auf.
+## Inhalte
+- 72 Artikel in 15 Sortimenten (Lizenzen nach Level), echte Ladenpreise und Großhandelspreise mit täglicher Schwankung von ±6 %.
+- 8 Regaltypen: Trocken-, Brot-, Kühl-, Getränke-, Drogerie- und Weinregal, Obst- & Gemüsestand, Tiefkühltruhe (Kühlung kostet Strom).
+- Preisgefühl der Kunden: bis etwa 5 % über Marktpreis kaufen fast alle, ab 60 % niemand.
+- Personal zum Mindestlohn 13,90 €/h: Kassierer, Regalbetreuer, Disponent.
+- Karriere mit 17 Zielen, täglich drei Tagesziele.
+- Gemeinschaftshaus: Werbegemeinschaft ab Level 8 (15.000 €) mit Wochenziel und gemeinsamen Aktionen (Prospekt, Stadtfest, Einkaufsgemeinschaft). Echte Mitspieler kommen mit der App.
+- Shop für Pakete vorbereitet, aber nicht aktiv.
 
-Pro Betrieb läuft eine neue Charge gleichzeitig (1–10 Chargenmengen, Dauer proportional). Fertige Ware bleibt bei vollem Lager erhalten und wird erst beim Abholen eingebucht. Alte Produktionsaufträge behalten ihre bisherigen 24/48/72-Stunden-Zeitstempel und lassen sich über dieselbe Betriebsansicht abholen. Tierhöfe und Fabriken sind nach Leveln kaufbar. Höhere Levelbetriebe oder falsche Rezeptzutaten werden auch in der Spielaktion abgewiesen.
-
-## Lager und Verkauf
-Das Lager hat 5.000 Plätze. Zehn Ausbauten bringen je 2.500 Plätze, erster Ausbau 500 Euro, jeder weitere 500 Euro teurer. Ein Supermarkt bringt zusätzlich 5.000 Plätze. Lagerplätze umfassen auch reservierte Regalware. Ausbaukosten werden als Investitionen geführt. Die Lageransicht zeigt standardmäßig nur vorhandene Waren, mit Suche und Gruppenfilter; freie Lagerware und reservierte Regalware sind getrennt sichtbar. Direktverkauf ist je Aktion bis 500 Stück und je Geschäftstag ab 2.000 Stück (zuzüglich vorhandener bisheriger Produktionsbetriebe) möglich. Die Gewinnspanne wird vor dem Verkauf angezeigt.
-
-Ladenkunden kaufen nur aus bestückten Regalen. Eigene Preise werden je Laden und Ware gespeichert. Höhere Preise verlangsamen die Nachfrage; oberhalb des doppelten Richtpreises bleiben Kunden aus. Öffnungszeiten: 06:00–23:00 Europe/Berlin mit automatischer Schließung und einmaliger Tagesabrechnung. Offline wird nur der letzte aktive Geschäftstag abgewickelt, keine Kette übersprungener Tageskosten. Wareneinkäufe, Investitionen und Bestand sind vom operativen Gewinn getrennt.
-
-## Spielstände und Prüfung
-Der Speicherschlüssel wirtschaftssimulator-v1 bleibt erhalten. Geld, Äcker, Betriebe, Waren, Preise, Konten, Regalreservierungen und alte Produktionen werden übernommen. Neue Waren werden mit null Bestand ergänzt, neue Lagerstufe ohne Zukauf freigeschaltet. Ein freiwilliger Neustart sichert den alten Stand lokal und bietet Wiederherstellung; dieses Update erfordert keinen Neustart. Es gibt noch keine Anmeldung oder geräteübergreifende Synchronisierung.
-
-npm ci · npm run dev · npm test · npm run build. 34 Tests prüfen Finanzrechnung, Speicherung, Zeitgrenzen, Freischaltungen, Lagerausbau, Saatgut-only-Kauf und die Erreichbarkeit aller Produkte sowie die kompletten Ketten Saatgut → Futter → Schweinefleisch und Honig → Wachs → Kerzen. Zusätzliche Bedienprüfung der fertigen Veröffentlichung.
+## Entwicklung
+`npm ci`, `npm run dev`, `npm test`, `npm run build`. Spiellogik in `lib/engine.mjs` (reine Funktionen), Inhalte und Preise in `lib/data.mjs`, Grafik in `app/art/`.
